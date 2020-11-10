@@ -1,6 +1,6 @@
 <?php
 
-//carregando arquivo de configuração (constantes, mapeamentos e requires)
+//carregando arquivo de configuração principal (constantes, mapeamentos e requires)
 //o dirname(__FILE__, 2) fornece o caminho do diretorio pai a partir do arquivo atual
 //assim conseguimos acessar o src
 require_once(dirname(__FILE__, 2) . '/src/config/config.php');
