@@ -1,19 +1,30 @@
 <?php
 
+//função que realiza o require de um model específico para o controller
 function loadModel($modelName) {
     require_once(MODEL_PATH . "/{$modelName}.php");
 }
 
+//função que carrega a view e cria variáveis com os parâmetros recebidos pelo controller
+//parâmetros devem ser passados como array chave=>valor
 function loadView($viewName, $params = array()) {
 
+    //se existirem parâmetros, prossegue
     if(count($params) > 0) {
+
+        //varrendo o array
         foreach($params as $key => $value) {
+
+            //se a chave não for vazia, prossegue
             if(strlen($key) > 0) {
+
+                //cria e inicializa uma variável dinâmica a partir do valor recebido
                 ${$key} = $value;
             }
         }
     }
 
+    //carrega a view
     require_once(VIEW_PATH . "/{$viewName}.php");
 }
 

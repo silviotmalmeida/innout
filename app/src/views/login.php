@@ -21,7 +21,10 @@
                 <i class="icofont-runner-alt-1 ml-2"></i>
             </div>
             <div class="card-body">
+
+                //inclui o template com mensagens
                 <?php include(TEMPLATE_PATH . '/messages.php') ?>
+                
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email"
