@@ -22,8 +22,10 @@
             </div>
             <div class="card-body">
 
+                <?php
                 //inclui o template com mensagens
-                <?php include(TEMPLATE_PATH . '/messages.php') ?>
+                include(TEMPLATE_PATH . '/messages.php')
+                ?>
                 
                 <div class="form-group">
                     <label for="email">E-mail</label>

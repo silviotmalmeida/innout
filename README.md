@@ -5,25 +5,21 @@ Trata-se da implementação de sistema de ponto eletrônico.
 
 O projeto encontra-se dockerizado para facilitar a implantação. As orientações para execução estão listadas abaixo:
 
-Linux:
-* Executar o comando "sudo ./scriptsDocker/startContainers.sh" em um terminal na pasta do projeto;
-* Para encerrar a execução utiliza-se o comando "sudo ./scriptsDocker/stopContainers.sh";
+* Executar o comando "sudo ./dockerBuild.sh" em um terminal na pasta do projeto/image;
 
-Windows:
-* Executar o comando "./scriptsDocker/startContainers.bat" em um terminal na pasta do projeto;
-* Para encerrar a execução utiliza-se o comando "./scriptsDocker/stopContainers.bat";
+* Executar o comando "sudo ./startContainers.sh" em um terminal na pasta do projeto;
 
-O servidor estará disponível na URL "localhost".
+* Carregar os usuários iniciais do sistema utilizando a URL "localhost/phpmyadmin", executando as instruções sql presentes no arquivo app/extras/db.sql;
 
-O phpmyadmin estará disponível na URL "localhost/phpmyadmin".
+* O sistema estará disponível na URL "localhost".
 
-Os dados de conexão ao banco de dados devem ser inseridos em um arquivo env.ini, tomando-se como modelo o arquivo env.sample.ini.
-
-Antes de se logar na aplicação, deve-ser criar o banco de dados innout utilizando o phpmyadmin. Existe um script sql que realiza a primeira população do banco de dados e criação dos usuários. Ele se encontra em extras/db.sql.
-
-Os usuários criados são:
+****
+Os usuários iniciais criados são:
 - 	login: admin@cod3r.com.br, password: a;
 - 	login: chaves@cod3r.com.br, password: a;
 - 	login: barriga@cod3r.com.br, password: a;
 - 	login: madruga@cod3r.com.br, password: a;
 - 	login: quico@cod3r.com.br, password: a;
+***
+
+* Para encerrar a execução utiliza-se o comando "sudo ./stopContainers.sh";

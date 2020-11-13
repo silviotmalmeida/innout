@@ -1,3 +1,4 @@
+CREATE DATABASE innout;
 USE innout;
 
 DROP TABLE IF EXISTS working_hours, users;

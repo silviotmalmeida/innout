@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+
+  #nome do servico
+  innout:
+
+    #construido a partir de uma imagem customizada em ./image
+    build:
+      context: "./image"
+
+    #nome do conteiner
+    container_name: ubuntu-xampp
+
+    #pastas compartilhadas
+    volumes:
+      #pasta do codigo fonte da aplicacao
+      - "./app:/opt/lampp/htdocs/innout/app"
+
+    #porta a ser exposta
+    ports:
+      - 80:80
+
+    #artifício para manter o container aberto
+    tty: true
