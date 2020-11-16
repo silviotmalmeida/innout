@@ -6,11 +6,13 @@ services:
   innout:
 
     #construido a partir de uma imagem customizada em ./image
-    build:
-      context: "./image"
+    #build:
+      #context: "./image"
+
+    image: innout
 
     #nome do conteiner
-    container_name: ubuntu-xampp
+    container_name: innout
 
     #pastas compartilhadas
     volumes:

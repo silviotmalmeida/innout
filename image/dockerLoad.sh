@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker load < ubuntu-xampp.tar
+docker load < innout.tar
