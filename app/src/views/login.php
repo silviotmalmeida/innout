@@ -24,26 +24,42 @@
 
                 <?php
                 //inclui o template com mensagens
+                //responsavel por popular o array $errors a partir da SESSION
                 include(TEMPLATE_PATH . '/messages.php')
                 ?>
                 
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email"
-                        class="form-control <?= $errors['email'] ? 'is-invalid' : '' ?>"
-                        value="<?= $email ?>"
+                        class="form-control <?=
+                            //se existir erro no email, usa a classe css 'is-invalid' no input
+                            $errors['email'] ? 'is-invalid' : ''
+                            ?>"
+                        value="<?=
+                            //utilizando a variavel email do POST
+                            $email
+                            ?>"
                         placeholder="Informe o e-mail" autofocus>
                     <div class="invalid-feedback">
-                        <?= $errors['email'] ?>
+                        <?=
+                            //se existir erro no email, imprime a mensagem
+                            $errors['email']
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
                     <input type="password" id="password" name="password"
-                        class="form-control <?= $errors['password'] ? 'is-invalid' : '' ?>"
+                        class="form-control <?=
+                            //se existir erro no password, usa a classe css 'is-invalid' no input
+                            $errors['password'] ? 'is-invalid' : ''
+                            ?>"
                         placeholder="Informe a senha">
                     <div class="invalid-feedback">
-                        <?= $errors['password'] ?>
+                        <?=
+                            //se existir erro no password, imprime a mensagem
+                            $errors['password']
+                        ?>
                     </div>
                 </div>
             </div>

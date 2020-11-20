@@ -18,13 +18,14 @@ function loadView($viewName, $params = array()) {
             //se a chave não for vazia, prossegue
             if(strlen($key) > 0) {
 
-                //cria e inicializa uma variável dinâmica a partir do valor recebido
+                //cria as variáveis dinâmicamente a partir dos valores recebidos
+                //essas variáveis serão repassadas à view
                 ${$key} = $value;
             }
         }
     }
 
-    //carrega a view
+    //carrega a view com as variáveis carregadas
     require_once(VIEW_PATH . "/{$viewName}.php");
 }
 

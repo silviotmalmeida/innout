@@ -1,5 +1,9 @@
 <?php
+
+//iniciando a sessão de usuário
 session_start();
+
+//validando a sessão
 requireValidSession();
 
 $date = (new Datetime())->getTimestamp();
