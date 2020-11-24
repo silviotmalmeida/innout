@@ -1,3 +1,6 @@
+#arquivo de configuracao do apache
+#para todas as requisicoes passarem obrigatoriamente pelo index.php
+
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /

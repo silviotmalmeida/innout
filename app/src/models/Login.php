@@ -19,6 +19,8 @@ class Login extends Model {
 
             //verifica se é um usuário ativo
             if($user->end_date) {
+
+                //senao lança uma exceção
                 throw new AppException('Usuário está desligado da empresa.');
             }
 
@@ -27,6 +29,8 @@ class Login extends Model {
                 return $user;
             }
         }
+
+        //senão lança uma exceção
         throw new AppException('Usuário e Senha inválidos.');
     }
 
@@ -45,6 +49,9 @@ class Login extends Model {
         if(!$this->password) {
             $errors['password'] = 'Por favor, informe a senha.';
         }
+
+        //se existir a necessidade de incluir novas validações,
+        //as mesmas devem ser incluídas aqui, populando o array $errors
 
         //se existir algum erro, lança uma exceção
         if(count($errors) > 0) {

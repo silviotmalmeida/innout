@@ -1,5 +1,7 @@
 <?php
 
+//template responsável pelo desenho da mensagem de erro na tela de login
+
 //inicializando o array de erros
 $errors = [];
 

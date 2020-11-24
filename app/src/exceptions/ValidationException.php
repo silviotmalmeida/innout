@@ -1,5 +1,6 @@
 <?php
 
+//exceção utilizada para os campos do formulário de login
 class ValidationException extends AppException {
 
     private $errors = [];
