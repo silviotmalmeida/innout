@@ -1,8 +1,20 @@
 
+//utilização de função anônima autoinvocada
 (function () {
+	
+	//ao clicar no objeto toogle, o menu lateral deve aparecer/desaparecer
+		
+	//linkando com o objeto toogle
     const menuToggle = document.querySelector('.menu-toggle')
+
+	//definindo a ação do objeto toogle
     menuToggle.onclick = function (e) {
+	
+		//linkando com o body
         const body = document.querySelector('body')
+
+		//o metodo classList.toggle ativa e desativa uma determinada classe do objeto
+		//ativa/desativa a classe hide-sidebar no body
         body.classList.toggle('hide-sidebar')
     }
 })()
