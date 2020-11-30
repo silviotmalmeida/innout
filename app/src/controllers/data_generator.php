@@ -1,8 +1,20 @@
 <?php
+
+//controller responsável por gerar uma massa de dados para o sistema,
+//populando a tabela working_hours
+
+//removendo todos os registros da tabela working_hours
 Database::executeSQL('DELETE FROM working_hours');
+
+//removendo os registros da tabela users com id > 5
 Database::executeSQL('DELETE FROM users WHERE id > 5');
 
+//função que retorna um cenário de marcações baseada em probabilidade
+//baseada nos pesos informados nos argumentos
+//a soma dos pesos deve ser 100
 function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
+    
+    //cenário de um dia normal
     $regularDayTemplate = [
         'time1' => '08:00:00',
         'time2' => '12:00:00',
@@ -11,6 +23,7 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
         'worked_time' => DAILY_TIME
     ];
     
+    //cenário de um dia com 1 hora extra
     $extraHourDayTemplate = [
         'time1' => '08:00:00',
         'time2' => '12:00:00',
@@ -19,6 +32,7 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
         'worked_time' => DAILY_TIME + 3600
     ];
     
+    //cenário de um dia com meia hora a menos
     $lazyDayTemplate = [
         'time1' => '08:30:00',
         'time2' => '12:00:00',
@@ -27,7 +41,10 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
         'worked_time' => DAILY_TIME - 1800
     ];
     
+    //obtendo um valor aleatório entre 0 e 100
     $value = rand(0, 100);
+    
+    //a partir do valor aleatório, é selecionado o cenário de marcações
     if($value <= $regularRate) {
         return $regularDayTemplate;
     } elseif($value <= $regularRate + $extraRate) {
@@ -37,6 +54,8 @@ function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate) {
     }
 }
 
+//função que popula a tabela working_hours
+//recebe como argumentos: id do usuário, data inicial, pesos de probabilidade
 function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate) {
     $currentDate = $initialDate;
     $yesterday = new DateTime();

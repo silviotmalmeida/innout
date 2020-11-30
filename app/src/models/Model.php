@@ -113,14 +113,20 @@ class Model {
             return $result;
         }
     }
-
+    
+    //função que insere um registro na tabela
     public function insert() {
+        
+        //construindo a query a partir das variáveis estáticas da model
         $sql = "INSERT INTO " . static::$tableName . " ("
             . implode(",", static::$columns) . ") VALUES (";
         foreach(static::$columns as $col) {
             $sql .= static::getFormatedValue($this->$col) . ",";
         }
+        //substituindo a última vírgula pelo parenteses final
         $sql[strlen($sql) - 1] = ')';
+        
+        //executando a query e obtendo o id de inserção
         $id = Database::executeSQL($sql);
         $this->id = $id;
     }

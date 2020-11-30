@@ -3,7 +3,7 @@
 //model referente à tabela users do banco de dados
 class User extends Model {
 
-    //nome da tabela no bd
+    //nome da tabela no banco de dados
     protected static $tableName = 'users';
 
     //lista de atributos da tabela

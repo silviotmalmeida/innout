@@ -71,6 +71,9 @@ function loadTemplateView($viewName, $params = array()) {
     require_once(TEMPLATE_PATH . "/footer.php");
 }
 
+//funcao que carrega a div de título da página de acordo com os parâmetros informados
 function renderTitle($title, $subtitle, $icon = null) {
+    
+    //carrega o template de título passando os parâmetros
     require_once(TEMPLATE_PATH . "/title.php");
 }

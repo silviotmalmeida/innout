@@ -1,7 +1,12 @@
 <?php
 
+//model referente à tabela working_hours do banco de dados
 class WorkingHours extends Model {
+    
+    //nome da tabela no banco de dados
     protected static $tableName = 'working_hours';
+    
+    //lista de atributos da tabela
     protected static $columns = [
         'id',
         'user_id',

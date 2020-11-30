@@ -1,15 +1,20 @@
 <main class="content">
     <?php
+        //passando os atributos para a função que renderiza a div de título
         renderTitle(
             'Registrar Ponto',
             'Mantenha seu ponto consistente!',
             'icofont-check-alt'
         );
+        
+        //incluindo o template de mensagens
         include(TEMPLATE_PATH . "/messages.php");
     ?>
     <div class="card">
         <div class="card-header">
-            <h3><?= $today ?></h3>
+            <h3><?=
+                //imprimindo a data por extenso, recebida pelo controller
+                $today ?></h3>
             <p class="mb-0">Os batimentos efetuados hoje</p>
         </div>
         <div class="card-body">

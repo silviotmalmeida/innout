@@ -25,11 +25,19 @@
         <div class="spacer"></div>
         <div class="dropdown">
             <div class="dropdown-button">
-                <img class="avatar" 
-                    src="<?= "http://www.gravatar.com/avatar.php?gravatar_id="
-                    . md5(strtolower(trim($_SESSION['user']->email))) ?>" alt="user">
+            	<img class="avatar" 
+                    src="                    
+                    <?=
+                    /*obtendo informações e imagem no gravatar a partir do e-mail presente na sessão*/
+                    "http://www.gravatar.com/avatar.php?gravatar_id="
+                    . md5(strtolower(trim($_SESSION['user']->email)))
+                    ?>
+                    " alt="user">
                 <span class="ml-3">
-                    <?= $_SESSION['user']->name ?>
+                	<?=
+                    /*imprimindo o nome do usuário da sessão*/
+                    $_SESSION['user']->name
+                    ?>
                 </span>
                 <i class="icofont-simple-down mx-2"></i>
             </div>

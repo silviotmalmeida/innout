@@ -1,20 +1,29 @@
 <?php
 
+//diversas funções utilitárias de data
+
+//função que retorna um objeto DateTime a partir de uma string
+//caso seja informado um DateTime, ela retornará o próprio DateTime
 function getDateAsDateTime($date) {
     return is_string($date) ? new DateTime($date) : $date;
 }
 
+//função que verifica se uma determonada data é um fim de semana
+//retorna true ou false
 function isWeekend($date) {
     $inputDate = getDateAsDateTime($date);
     return $inputDate->format('N') >= 6;
 }
 
+//função que verifica se uma data é anterior a outra
+//retorna true ou false
 function isBefore($date1, $date2) {
     $inputDate1 = getDateAsDateTime($date1);
     $inputDate2 = getDateAsDateTime($date2);
     return $inputDate1 <= $inputDate2;
 }
 
+//função que retorna um DateTime referente ao dia posterior ao informado no argumento
 function getNextDay($date) {
     $inputDate = getDateAsDateTime($date);
     $inputDate->modify('+1 day');

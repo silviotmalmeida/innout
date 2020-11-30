@@ -38,13 +38,25 @@ class Database {
         return $result;
     }
 
+    //função que executa uma query e retorna o id de inserção,
+    //caso seja uma query de inserção, senão retorna nulo
     public static function executeSQL($sql) {
+        
+        //criando a conexão
         $conn = self::getConnection();
+        
+        //executando a query
+        //caso ocorra algum erro, lança uma exceção
         if(!mysqli_query($conn, $sql)) {
             throw new Exception(mysqli_error($conn));
         }
+        
+        //obtendo o id, caso seja uma operação de inserção
         $id = $conn->insert_id;
+        
+        //fechando a conexão
         $conn->close();
+        
         return $id;
     }
 }

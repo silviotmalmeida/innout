@@ -15,5 +15,5 @@ $date = (new Datetime())->getTimestamp();
 //obtendo a data por extenso
 $today = strftime('%d de %B de %Y', $date);
 
-//carregando a view, com os dados horários de hoje
+//carregando a view, passando como atributo a data por extenso
 loadTemplateView('day_records', ['today' => $today]);
