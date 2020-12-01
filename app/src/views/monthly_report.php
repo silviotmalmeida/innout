@@ -1,5 +1,6 @@
 <main class="content">
 	<?php
+	
 		renderTitle(
 			'Relatório Mensal',
 			'Acompanhe seu saldo de horas',

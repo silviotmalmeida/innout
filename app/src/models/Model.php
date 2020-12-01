@@ -123,6 +123,7 @@ class Model {
         foreach(static::$columns as $col) {
             $sql .= static::getFormatedValue($this->$col) . ",";
         }
+        
         //substituindo a última vírgula pelo parenteses final
         $sql[strlen($sql) - 1] = ')';
         
