@@ -3,7 +3,7 @@
 (function () {
 	
 	//ao clicar no objeto toogle, o menu lateral deve aparecer/desaparecer
-		
+	
 	//linkando com o objeto toogle
 	const menuToggle = document.querySelector('.menu-toggle')
 

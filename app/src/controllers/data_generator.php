@@ -63,7 +63,7 @@ function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $
     
     //obtendo a data de ontem
     $yesterday = new DateTime();
-    //$yesterday->modify('-1 day');
+    $yesterday->modify('-1 day');
     
     //criando e começando a popular o array de atributos
     //este array será utilizado na criacao da instancia do model workingHours

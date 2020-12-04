@@ -52,12 +52,14 @@ function loadTemplateView($viewName, $params = array()) {
     //obtendo o usuário da sessão
     $user = $_SESSION['user'];
 
-
+    //obtendo os dados de marcação do usuário no dia atual
     $workingHours = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
     $workedInterval = $workingHours->getWorkedInterval()->format('%H:%I:%S');
     $exitTime = $workingHours->getExitTime()->format('H:i:s');
     $activeClock = $workingHours->getActiveClock();
 
+    //estes dados serão repassados para as views e templates abaixo
+    
     //carregando o header
     require_once(TEMPLATE_PATH . "/header.php");
 

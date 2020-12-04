@@ -18,16 +18,23 @@ class WorkingHours extends Model {
         'worked_time'
     ];
 
+    //função que carrega os registros de ponto de um usuário em um determinado dia
     public static function loadFromUserAndDate($userId, $workDate) {
+        
+        //consultando o registro no banco de dados
         $registry = self::getOne(['user_id' => $userId, 'work_date' => $workDate]);
 
+        //se não existir o registro,
         if(!$registry) {
+            
+            //cria um objeto de WorkingHours com os dados de marcação zerados
             $registry = new WorkingHours([
                 'user_id' => $userId,
                 'work_date' => $workDate,
                 'worked_time' => 0
             ]);
         }
+        //senão, cria um objeto de WorkingHours com os dados retornados do banco de dados
 
         return $registry;
     }
