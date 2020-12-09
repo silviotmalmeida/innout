@@ -13,18 +13,32 @@
     <div class="card">
         <div class="card-header">
             <h3><?=
-                //imprimindo a data por extenso, recebida pelo controller
+                //imprimindo a data por extenso, variável recebida pelo controller
                 $today ?></h3>
             <p class="mb-0">Os batimentos efetuados hoje</p>
         </div>
         <div class="card-body">
             <div class="d-flex m-5 justify-content-around">
-                <span class="record">Entrada 1: <?= $workingHours->time1 ?? '---' ?></span>
-                <span class="record">Saída 1: <?= $workingHours->time2 ?? '---' ?></span>
+                <span class="record">Entrada 1: <?=
+                                                    //imprimindo a primeira marcação caso exista, ou a string '---'
+                                                    //objeto recebido pelo controller
+                                                    $workingHours->time1 ?? '---' ?></span>
+                                                   
+                <span class="record">Saída 1: <?=
+                                                    //imprimindo a segunda marcação caso exista, ou a string '---'
+                                                    //objeto recebido pelo controller
+                                                    $workingHours->time2 ?? '---' ?></span>
             </div>
             <div class="d-flex m-5 justify-content-around">
-                <span class="record">Entrada 2: <?= $workingHours->time3 ?? '---' ?></span>
-                <span class="record">Saída 2: <?= $workingHours->time4 ?? '---' ?></span>
+                <span class="record">Entrada 2: <?= 
+                                                    //imprimindo a terceira marcação caso exista, ou a string '---'
+                                                    //objeto recebido pelo controller
+                                                    $workingHours->time3 ?? '---' ?></span>
+                                                    
+                <span class="record">Saída 2: <?=
+                                                    //imprimindo a quarta marcação caso exista, ou a string '---'
+                                                    //objeto recebido pelo controller
+                                                    $workingHours->time4 ?? '---' ?></span>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">

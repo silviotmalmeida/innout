@@ -132,13 +132,22 @@ class Model {
         $this->id = $id;
     }
 
+    //função que altera um registro na tabela
     public function update() {
+        
+        //construindo a query a partir das variáveis estáticas da model
         $sql = "UPDATE " . static::$tableName . " SET ";
         foreach(static::$columns as $col) {
             $sql .= " ${col} = " . static::getFormatedValue($this->$col) . ",";
         }
+        
+        //substituindo a última vírgula por um espaço em branco
         $sql[strlen($sql) - 1] = ' ';
+        
+        //inserindo a cláusula where
         $sql .= "WHERE id = {$this->id}";
+        
+        //executando a query
         Database::executeSQL($sql);
     }
 

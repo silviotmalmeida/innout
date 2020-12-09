@@ -39,11 +39,22 @@ class WorkingHours extends Model {
         return $registry;
     }
 
+    //função que verifica qual o próxima marcação a ser efetuada
     public function getNextTime() {
+        
+        //se $time1 não estive nula, retorne a string time1
         if(!$this->time1) return 'time1';
+        
+        //se $time2 não estive nula, retorne a string time2
         if(!$this->time2) return 'time2';
+        
+        //se $time3 não estive nula, retorne a string time3
         if(!$this->time3) return 'time3';
+        
+        //se $time4 não estive nula, retorne a string time4
         if(!$this->time4) return 'time4';
+        
+        //senão retorne null
         return null;
     }
 
@@ -58,21 +69,41 @@ class WorkingHours extends Model {
         }
     }
 
+    //função que executa a marcação do ponto
+    //recebe como argumento um DateTime com a hora a ser registrada
     public function innout($time) {
+        
+        //verificando qual a próxima marcação a ser realizada
         $timeColumn = $this->getNextTime();
+        
+        //se a próxima marcação for null, prossegue:
         if(!$timeColumn) {
+            
+            //lança uma exceção
             throw new AppException("Você já fez os 4 batimentos do dia!");
         }
+        
+        //senão, popula a variável da próxima marcação dinamicamente
         $this->$timeColumn = $time;
+       
+        //popula a variavel com o total de tempo trabalhado
         $this->worked_time = getSecondsFromDateInterval($this->getWorkedInterval());
+        
+        //se o objeto possuir id, será realizado um update
         if($this->id) {
             $this->update();
-        } else {
+        }
+        
+        //senão, será realizado um insert
+        else {
             $this->insert();
         }
     }
 
+    //função que calcula o total trabalhado no dia
     function getWorkedInterval() {
+        
+        //populando o arrray de marcações
         [$t1, $t2, $t3, $t4] = $this->getTimes();
 
         $part1 = new DateInterval('PT0S');
@@ -80,6 +111,9 @@ class WorkingHours extends Model {
 
         if($t1) $part1 = $t1->diff(new DateTime());
         if($t2) $part1 = $t1->diff($t2);
+        
+        
+        
         if($t3) $part2 = $t3->diff(new DateTime());
         if($t4) $part2 = $t3->diff($t4);
 
@@ -170,14 +204,19 @@ class WorkingHours extends Model {
         return $registries;
     }
 
+    //fução que popula um array de strings com as marcações do dia
     private function getTimes() {
+        
+        //inicializando um array vazio
         $times = [];
 
+        //populando o array com as marcações convertidas em string ou com valor null
         $this->time1 ? array_push($times, getDateFromString($this->time1)) : array_push($times, null);
         $this->time2 ? array_push($times, getDateFromString($this->time2)) : array_push($times, null);
         $this->time3 ? array_push($times, getDateFromString($this->time3)) : array_push($times, null);
         $this->time4 ? array_push($times, getDateFromString($this->time4)) : array_push($times, null);
 
+        //retorna o array de strings
         return $times;
     }
 }

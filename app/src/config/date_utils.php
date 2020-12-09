@@ -30,10 +30,17 @@ function getNextDay($date) {
     return $inputDate;
 }
 
+//função que retorna um DateTime referente à soma de dois intervalos de tempo
 function sumIntervals($interval1, $interval2) {
+    
+    //criando um objeto DateTime zerado
     $date = new DateTime('00:00:00');
+    
+    //adicionando os intervalos de tempo
     $date->add($interval1);
     $date->add($interval2);
+    
+    //retornando um Datetime com a diferença de tempo
     return (new DateTime('00:00:00'))->diff($date);
 }
 
@@ -62,6 +69,7 @@ function getLastDayOfMonth($date) {
     return new DateTime(date('Y-m-t', $time));
 }
 
+//calcula a quantidade de segundos a partir de um 
 function getSecondsFromDateInterval($interval) {
     $d1 = new DateTimeImmutable();
     $d2 = $d1->add($interval);
