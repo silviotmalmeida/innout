@@ -101,45 +101,85 @@ class WorkingHours extends Model {
     }
 
     //função que calcula o total trabalhado no dia
+    //retorna um DateInterval    
     function getWorkedInterval() {
         
-        //populando o arrray de marcações
+        //populando o arrray de marcações com DateTime
         [$t1, $t2, $t3, $t4] = $this->getTimes();
 
+        //Criando um DateInterval zerado referente ao periodo da manhã
         $part1 = new DateInterval('PT0S');
+        
+        //Criando um DateInterval zerado referente ao periodo da tarde
         $part2 = new DateInterval('PT0S');
+        
+        //calculando $part1
+            //se $t1 estiver definido, $part1 recebe a diferença ao horário atual
+            if($t1) $part1 = $t1->diff(new DateTime());
+            //se $t2 estiver definido, $part1 recebe a diferença entre $t1 e $t2
+            if($t2) $part1 = $t1->diff($t2);  
+        
+        //calculando $part2    
+            //se $t3 estiver definido, $part2 recebe a diferença ao horário atual
+            if($t3) $part2 = $t3->diff(new DateTime());
+            //se $t4 estiver definido, $part2 recebe a diferença entre $t3 e $t4
+            if($t4) $part2 = $t3->diff($t4);
 
-        if($t1) $part1 = $t1->diff(new DateTime());
-        if($t2) $part1 = $t1->diff($t2);
-        
-        
-        
-        if($t3) $part2 = $t3->diff(new DateTime());
-        if($t4) $part2 = $t3->diff($t4);
-
+        //retorna o DateInterval referente à soma entre $part1 e $part2
         return sumIntervals($part1, $part2);
     }
 
+    //função que calcula o tempo usado para almoço
+    //retorna um DateInterval
     function getLunchInterval() {
+        
+        //populando o arrray de marcações com DateTime
+        //somente são populados o $t2 e $t3
         [, $t2, $t3,] = $this->getTimes();
+        
+        //Criando um DateInterval zerado
         $lunchInterval = new DateInterval('PT0S');
+        
+        //calculando $lunchInterval
+            //se $t2 estiver definido, $lunchInterval recebe a diferença ao horário atual
+            if($t2) $lunchInterval = $t2->diff(new DateTime());
+            //se $t3 estiver definido, $lunchInterval recebe a diferença entre $t2 e $t3
+            if($t3) $lunchInterval = $t2->diff($t3);
 
-        if($t2) $lunchInterval = $t2->diff(new DateTime());
-        if($t3) $lunchInterval = $t2->diff($t3);
-
+        //retorna o DateInterval referente ao tempo usado para almoço
         return $lunchInterval;
     }
 
+    //função que calcula o horário mínimo para saída
+    //retorna um DateTime
     function getExitTime() {
+        
+        //populando o arrray de marcações com DateTime
+        //somente são populados o $t1 e $t4
         [$t1,,, $t4] = $this->getTimes();
+        
+        //Criando um DateInterval com o expediente padrão    
         $workday = DateInterval::createFromDateString('8 hours');
 
+        //se o $t1 estiver nulo:
         if(!$t1) {
+            
+            //retorna um DateTime com a hora atual incrementada com o expediente padrão
             return (new DateTimeImmutable())->add($workday);
-        } elseif($t4) {
+        }
+        //se o $t4 estiver marcado:
+        elseif($t4) {
+            
+            //retorna o horário de saída verificado
             return $t4;
-        } else {
+        }
+        //senão:
+        else {
+            
+            //calcula o somatório entre o expediente padrão e o tempo utilizado para almoço
             $total = sumIntervals($workday, $this->getLunchInterval());
+
+            //retorna o tempo de $t1 incrementado de $total
             return $t1->add($total);
         }
     }
@@ -204,19 +244,19 @@ class WorkingHours extends Model {
         return $registries;
     }
 
-    //fução que popula um array de strings com as marcações do dia
+    //função que popula um array de DateTime com as marcações do dia
     private function getTimes() {
         
         //inicializando um array vazio
         $times = [];
 
-        //populando o array com as marcações convertidas em string ou com valor null
+        //populando o array com as marcações convertidas em DateTime ou com valor null
         $this->time1 ? array_push($times, getDateFromString($this->time1)) : array_push($times, null);
         $this->time2 ? array_push($times, getDateFromString($this->time2)) : array_push($times, null);
         $this->time3 ? array_push($times, getDateFromString($this->time3)) : array_push($times, null);
         $this->time4 ? array_push($times, getDateFromString($this->time4)) : array_push($times, null);
 
-        //retorna o array de strings
+        //retorna o array de DateTime
         return $times;
     }
 }

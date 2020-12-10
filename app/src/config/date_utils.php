@@ -30,7 +30,8 @@ function getNextDay($date) {
     return $inputDate;
 }
 
-//função que retorna um DateTime referente à soma de dois intervalos de tempo
+//função que retorna um DateInterval referente à soma de dois intervalos de tempo
+//recebe dois objetos DateInterval com intervalos de tempo
 function sumIntervals($interval1, $interval2) {
     
     //criando um objeto DateTime zerado
@@ -40,21 +41,33 @@ function sumIntervals($interval1, $interval2) {
     $date->add($interval1);
     $date->add($interval2);
     
-    //retornando um Datetime com a diferença de tempo
+    //retornando um DateInterval com a soma de intervalos    
     return (new DateTime('00:00:00'))->diff($date);
 }
 
+//função que retorna um DateInterval referente à diferença de dois intervalos de tempo
+//recebe dois objetos DateInterval com intervalos de tempo
 function subtractIntervals($interval1, $interval2) {
+    
+    //criando um objeto DateTime zerado
     $date = new DateTime('00:00:00');
+    
+    //adicionando o primeiro intervalo de tempo
     $date->add($interval1);
+    
+    //subtraindo o segundo intervalo de tempo
     $date->sub($interval2);
+    
+    //retornando um DateInterval com a diferença de intervalos
     return (new DateTime('00:00:00'))->diff($date);
 }
 
+//função que converte um DateInterval em um DateTime
 function getDateFromInterval($interval) {
     return new DateTimeImmutable($interval->format('%H:%i:%s'));
 }
 
+//função que converte uma String no formato hh:mm:ss em um DateTime
 function getDateFromString($str) {
     return DateTimeImmutable::createFromFormat('H:i:s', $str);
 }

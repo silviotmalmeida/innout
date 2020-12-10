@@ -22,8 +22,20 @@ try {
     //o formato de preenchimento é hh:mm:ss
     if($_POST['forcedTime']) {
         
-        //popula a variável com o horário simulado
-        $currentTime = $_POST['forcedTime'];
+        //validando o formato hh:mm:ss inserido no formulário
+        //caso seja não seja compatível com a expressão regular:        
+        if(!preg_match("/^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/", $_POST['forcedTime'])){
+            
+            //lança uma exceção
+            throw new AppException("Formato de hora simulada inválido!");
+        }
+        
+        //caso seja compatível:
+        else{
+        
+            //popula a variável com o horário simulado
+            $currentTime = $_POST['forcedTime'];
+        }
     }
 
     //realizando a marcação do ponto usando a hora atual
