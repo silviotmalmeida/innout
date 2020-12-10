@@ -41,6 +41,8 @@
                                                     $workingHours->time4 ?? '---' ?></span>
             </div>
         </div>
+        
+        <!-- botão responsável por chamar o controller innout.php -->
         <div class="card-footer d-flex justify-content-center">
             <a href="innout.php" class="btn btn-success btn-lg">
                 <i class="icofont-check mr-1"></i>
@@ -49,10 +51,12 @@
         </div>
     </div>
 
+    <!-- formulário responsável por simular os batimentos do ponto
+         o formato de preenchimento é hh:mm:ss -->
     <form class="mt-5" action="innout.php" method="post">
         <div class="input-group no-border">
             <input type="text" name="forcedTime" class="form-control"
-                placeholder="Informe a hora para simular o batimento">
+                placeholder="Informe a hora para simular o batimento com o formato hh:mm:ss">
             <button class="btn btn-danger ml-3">
                 Simular Ponto
             </button>

@@ -37,3 +37,4 @@ if(count($_POST) > 0) {
 
 //renderizando a view de login e passando dados de usuário e de exceção
 loadView('login', $_POST + ['exception' => $exception]);
+
