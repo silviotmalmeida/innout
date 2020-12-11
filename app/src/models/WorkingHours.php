@@ -244,8 +244,13 @@ class WorkingHours extends Model {
         return $result->fetch_assoc()['sum'];
     }
 
+    //função que retorna um array de WorkingHours de um determinado usuário em um determinado mês
     public static function getMonthlyReport($userId, $date) {
+        
+        //inicializando o array de registros
         $registries = [];
+        
+        //definindo o primeiro dia do mês
         $startDate = getFirstDayOfMonth($date)->format('Y-m-d');
         $endDate = getLastDayOfMonth($date)->format('Y-m-d');
 

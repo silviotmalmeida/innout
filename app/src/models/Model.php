@@ -166,7 +166,7 @@ class Model {
         Database::executeSQL($sql);
     }
 
-    //função auxiliar que avalia os filtros a serem inseridos na cláusula WHERE
+    //função auxiliar que avalia e formata os filtros a serem inseridos na cláusula WHERE
     private static function getFilters($filters) {
         
         //construção da cláusula WHERE        
@@ -181,14 +181,23 @@ class Model {
             //percorrendo o array de filtros
             foreach($filters as $column => $value) {
 
-                //
+                //se for passado um filtro de chave raw:
                 if($column == 'raw') {
+                    
+                    //será utilizado o valor diretamente
                     $sql .= " AND {$value}";
-                } else {
+                }
+                
+                //senão:
+                else {
+                    
+                    //será utilizada a chave como o atributo 
                     $sql .= " AND ${column} = " . static::getFormatedValue($value);
                 }
             }
-        } 
+        }
+        
+        //retorna os filtros formatados
         return $sql;
     }
 

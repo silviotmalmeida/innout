@@ -2,7 +2,7 @@
 
 //diversas funções utilitárias de data
 
-//função que retorna um objeto DateTime a partir de uma string
+//função que retorna um objeto DateTime a partir de uma string no formato aaaa-mm-dd
 //caso seja informado um DateTime, ela retornará o próprio DateTime
 function getDateAsDateTime($date) {
     return is_string($date) ? new DateTime($date) : $date;
@@ -72,13 +72,23 @@ function getDateFromString($str) {
     return DateTimeImmutable::createFromFormat('H:i:s', $str);
 }
 
+//função que retorna um DateTime com o primeiro dia do mês de uma determinada data
 function getFirstDayOfMonth($date) {
+    
+    //convertendo a data aaaa-mm-dd em DateTime e depois em time
     $time = getDateAsDateTime($date)->getTimestamp();
+    
+    //retornando o primeiro dia do mês
     return new DateTime(date('Y-m-1', $time));
 }
 
+//função que retorna um DateTime com o último dia do mês de uma determinada data
 function getLastDayOfMonth($date) {
+    
+    //convertendo a data aaaa-mm-dd em DateTime e depois em time
     $time = getDateAsDateTime($date)->getTimestamp();
+    
+    //retornando o último dia do mês
     return new DateTime(date('Y-m-t', $time));
 }
 

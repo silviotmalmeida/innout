@@ -19,28 +19,48 @@
 	}
 })()
 
+
+//função responsável por atualizar contiuamente o relógio
 function activateClock() {
+	
+	//linkando com o objeto que contenha a classe active-clock
     const activeClock = document.querySelector('[active-clock]')
+
+	//se não existir tal classe, encerra a função
     if(!activeClock) return
 
-    function addOneSecond(hours, minutes, seconds) {
+	//função responsável por adicionar 1 segundo a um horário passado por argumento
+	function addOneSecond(hours, minutes, seconds) {
+		
+		//criando um objeto Date
         const d = new Date()
+
+		//setando a hora e minuto recebidos por argumento
         d.setHours(parseInt(hours))
         d.setMinutes(parseInt(minutes))
+
+		//setando o segundo recebido por argumento e incrementando em 1
         d.setSeconds(parseInt(seconds) + 1)
     
+		//populando as variáveis de saída
         const h = `${d.getHours()}`.padStart(2, 0)
         const m = `${d.getMinutes()}`.padStart(2, 0)
         const s = `${d.getSeconds()}`.padStart(2, 0)
     
+		//retornando o horário incrementado em 1 segundo
         return `${h}:${m}:${s}`
     }
 
+	//função de loop infinito a cada 1000ms
     setInterval(function() {
-        // '07:27:19' => ['07', '27', '19']
+
+		//obtendo o array com hora, minuto e segundo presentes no html
         const parts = activeClock.innerHTML.split(':')
+
+		//setando no html os novos valores de hora, minuto e segundo
         activeClock.innerHTML = addOneSecond(...parts)
     }, 1000)
 }
 
+//ativando a atualização automática do relógio
 activateClock()
