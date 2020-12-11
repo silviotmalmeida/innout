@@ -39,7 +39,7 @@ class WorkingHours extends Model {
         return $registry;
     }
 
-    //função que verifica qual o próxima marcação a ser efetuada
+    //função que verifica qual a próxima marcação a ser efetuada
     public function getNextTime() {
         
         //se $time1 não estive nula, retorne a string time1
@@ -58,13 +58,32 @@ class WorkingHours extends Model {
         return null;
     }
 
+    //função que define qual dos relógios (workingInterval ou exitTime) será atualizada a cada segundo
     public function getActiveClock() {
+        
+        //obtendo qual a próxima marcação a ser efetuada
         $nextTime = $this->getNextTime();
+        
+        //se a próxima marcação for time1 ou time 3:
         if($nextTime === 'time1' || $nextTime === 'time3') {
+            
+            //o relógio a ser atualizado é o exitInterval
             return 'exitTime';
-        } elseif($nextTime === 'time2' || $nextTime === 'time4') {
+            
+        }
+        
+        //se a próxima marcação for time2 ou time 4:
+        elseif($nextTime === 'time2' || $nextTime === 'time4') {
+            
+            //o relógio a ser atualizado é o workedInterval
             return 'workedInterval';
-        } else {
+            
+        }
+        
+        //senão:
+        else {
+            
+            //retorne null
             return null;
         }
     }

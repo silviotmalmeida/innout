@@ -55,13 +55,13 @@ function loadTemplateView($viewName, $params = array()) {
     //criando um objeto de WorkingHours com as marcações do usuário no dia atual
     $workingHours = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
     
-    
+    //calculando o total de horas trabalhado no dia e formatando como hh:mm:ss
     $workedInterval = $workingHours->getWorkedInterval()->format('%H:%I:%S');
     
-    
+    //calculando o horário mínimo para saída e formatando como hh:mm:ss
     $exitTime = $workingHours->getExitTime()->format('H:i:s');
     
-    
+    //definindo qual dos relógios (workingInterval ou exitTime) será atualizada a cada segundo
     $activeClock = $workingHours->getActiveClock();
 
     //estes dados serão repassados para as views e templates abaixo
