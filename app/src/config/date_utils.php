@@ -92,21 +92,31 @@ function getLastDayOfMonth($date) {
     return new DateTime(date('Y-m-t', $time));
 }
 
-//calcula a quantidade de segundos a partir de um 
+//função que calcula a quantidade de segundos a partir de um DateInterval
 function getSecondsFromDateInterval($interval) {
     $d1 = new DateTimeImmutable();
     $d2 = $d1->add($interval);
     return $d2->getTimestamp() - $d1->getTimestamp();
 }
 
+//função que verifica se uma determinada data está no passado e é final de semana
 function isPastWorkday($date) {
     return !isWeekend($date) && isBefore($date, new DateTime());
 }
 
+//função que retorna uma String hh:mm:ss apartir de uma quantidade de segundos
 function getTimeStringFromSeconds($seconds) {
+    
+    //obtendo a quantidade de horas
     $h = intdiv($seconds, 3600);
+    
+    //obtendo a quantidade de minutos
     $m = intdiv($seconds % 3600, 60);
+    
+    //obtendo os segundos restantes
     $s = $seconds - ($h * 3600) - ($m * 60);
+    
+    //retorna a String formatada como hh:mm:ss
     return sprintf('%02d:%02d:%02d', $h, $m, $s);
 }
 

@@ -250,21 +250,28 @@ class WorkingHours extends Model {
         //inicializando o array de registros
         $registries = [];
         
-        //definindo o primeiro dia do mês
+        //definindo o primeiro dia do mês e formatando como aaaa-mm-dd
         $startDate = getFirstDayOfMonth($date)->format('Y-m-d');
+        
+        //definindo o último dia do mês e formatando como aaaa-mm-dd
         $endDate = getLastDayOfMonth($date)->format('Y-m-d');
 
+        //realizando a consulta ao banco de dados
         $result = static::getResultSetFromSelect([
             'user_id' => $userId,
             'raw' => "work_date between '{$startDate}' AND '{$endDate}'"
         ]);
-
+        
+        //se existirem resultados:
         if($result) {
+            
+            //populando um array de objetos WorkingHours com a chave sendo a data
             while($row = $result->fetch_assoc()) {
                 $registries[$row['work_date']] = new WorkingHours($row);
             }
         }
         
+        //retornando o array de objetos WorkingHours
         return $registries;
     }
 
