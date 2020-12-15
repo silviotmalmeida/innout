@@ -66,13 +66,13 @@ $workDay = 0;
 $sumOfWorkedTime = 0;
 
 //obtendo o último dia do mês
-$lastDay = getLastDayOfMonth($currentDate)->format('d');
+$lastDay = getLastDayOfMonth($selectedPeriod)->format('d');
 
 //iterando sobre os dias do mês
 for($day = 1; $day <= $lastDay; $day++) {
     
     //obtendo a data no formato aaaa-mm-dd
-    $date = $currentDate->format('Y-m') . '-' . sprintf('%02d', $day);
+    $date = $selectedPeriod . '-' . sprintf('%02d', $day);
     
     //obtendo o objeto WorkingHours da data referente à iteração atual
     $registry = $registries[$date];

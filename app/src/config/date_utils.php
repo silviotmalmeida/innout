@@ -15,7 +15,7 @@ function isWeekend($date) {
     return $inputDate->format('N') >= 6;
 }
 
-//função que verifica se uma data é anterior a outra
+//função que verifica se uma data é anterior ou igual a outra
 //retorna true ou false
 function isBefore($date1, $date2) {
     $inputDate1 = getDateAsDateTime($date1);
@@ -120,6 +120,7 @@ function getTimeStringFromSeconds($seconds) {
     return sprintf('%02d:%02d:%02d', $h, $m, $s);
 }
 
+//função que converte um DateTime em uma String formatada de acordo com um pattern
 function formatDateWithLocale($date, $pattern) {
     $time = getDateAsDateTime($date)->getTimestamp();
     return strftime($pattern, $time);

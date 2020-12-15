@@ -203,18 +203,35 @@ class WorkingHours extends Model {
         }
     }
 
+    //função que calcula o saldo de horas do dia em relação ao expediente padrão
     function getBalance() {
+        
+        //se ainda não existir a marcação 1 e for um dia no futuro ou final de semana, retorne ''
         if(!$this->time1 && !isPastWorkday($this->work_date)) return '';
+        
+        //se o tempo trabalhado for igual ao expediente padrão, retorne '-'
         if($this->worked_time == DAILY_TIME) return '-';
 
+        //calculando o saldo em relação ao expediente padrão
         $balance = $this->worked_time - DAILY_TIME;
+        
+        //convertendo o saldo absoluto no formato hh:mm:ss
         $balanceString = getTimeStringFromSeconds(abs($balance));
+        
+        //definindo o sinal do saldo
         $sign = $this->worked_time >= DAILY_TIME ? '+' : '-';
+        
+        //retornando o saldo com o sinal
         return "{$sign}{$balanceString}";
     }
 
+    //função que retorna os nomes dos usuários ativos que ainda não registraram ponto no dia atual
     public static function getAbsentUsers() {
+        
+        //obtendo o dia atual
         $today = new DateTime();
+        
+        //obtendo os nomes dos usuários ativos que ainda não registraram ponto no dia atual
         $result = Database::getResultFromQuery("
             SELECT name FROM users
             WHERE end_date is NULL
@@ -225,22 +242,37 @@ class WorkingHours extends Model {
             )
         ");
 
+        //inicializando o array de nomes
         $absentUsers = [];
+        
+        //se existirem resultados:
         if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
+                
+                //populando o array de nomes
                 array_push($absentUsers, $row['name']);
             }
         }
 
+        //retornando o array de nomes
         return $absentUsers;
     }
 
+    //função que calcula a quantidade total de segundos trabalhados no mês atual
     public static function getWorkedTimeInMonth($yearAndMonth) {
+        
+        //obtendo o primeiro dia do mês
         $startDate = (new DateTime("{$yearAndMonth}-1"))->format('Y-m-d');
+        
+        //obtendo o último dia do mês
         $endDate = getLastDayOfMonth($yearAndMonth)->format('Y-m-d');
+        
+        //calculando a quantidade total de segundos trabalhados no mês atual
         $result = static::getResultSetFromSelect([
             'raw' => "work_date BETWEEN '{$startDate}' AND '{$endDate}'"
         ], "sum(worked_time) as sum");
+        
+        //retornando a quantidade total de segundos trabalhados no mês atual
         return $result->fetch_assoc()['sum'];
     }
 

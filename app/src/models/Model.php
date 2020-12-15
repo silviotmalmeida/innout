@@ -102,10 +102,10 @@ class Model {
 
             //a validacao da clausula WHERE vem da funcao auxiliar getFilters
             . static::getFilters($filters);
-
+            
         //realizando a consulta
         $result = Database::getResultFromQuery($sql);
-
+        
         //retornando os resultados
         if($result->num_rows === 0) {
             return null;
@@ -151,6 +151,7 @@ class Model {
         Database::executeSQL($sql);
     }
 
+    //função que retorna a quantidade de registros de uma consulta
     public static function getCount($filters = []) {
         $result = static::getResultSetFromSelect(
             $filters, 'count(*) as count');
