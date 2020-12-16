@@ -158,12 +158,18 @@ class Model {
         return $result->fetch_assoc()['count'];
     }
 
+    //função que exclui um registro na tabela
     public function delete() {
         static::deleteById($this->id);
     }
 
+    //função auxiliar que implementa uma delete query para o id fornecido como atributo
     public static function deleteById($id) {
+        
+        //contruindo a query
         $sql = "DELETE FROM " . static::$tableName . " WHERE id = {$id}";
+        
+        //executando a query
         Database::executeSQL($sql);
     }
 
