@@ -16,7 +16,7 @@
             <h3 class="value"><?=
                                 //imprimindo a quantidade de usuários ativos
                                 //a variável $activeUsersCount vem do controller
-						        $activeUsersCount
+                                $activeUsersCount
                               ?></h3>
         </div>
         <div class="summary-box bg-danger">

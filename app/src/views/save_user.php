@@ -1,11 +1,15 @@
 <main class="content">
     <?php
+    
+        //renderizando a área do titulo
         renderTitle(
             'Cadastro de Usuário',
             'Crie e atualize o usuário',
             'icofont-user'
         );
 
+        //inclui o template com mensagens
+        //responsavel por popular o array $errors a partir da SESSION
         include(TEMPLATE_PATH . "/messages.php");
     ?>
 
