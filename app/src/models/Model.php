@@ -126,7 +126,7 @@ class Model {
         
         //substituindo a última vírgula pelo parenteses final
         $sql[strlen($sql) - 1] = ')';
-        
+                        
         //executando a query e obtendo o id de inserção
         $id = Database::executeSQL($sql);
         $this->id = $id;

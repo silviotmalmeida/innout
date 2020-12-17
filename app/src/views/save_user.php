@@ -13,6 +13,7 @@
         include(TEMPLATE_PATH . "/messages.php");
     ?>
 
+    <!-- Criação do formulário com os atributos recebidos do controller -->
     <form action="#" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
         <div class="form-row">
