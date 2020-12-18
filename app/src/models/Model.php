@@ -21,13 +21,19 @@ class Model {
         if($arr) {
             // $conn = Database::getConnection();
             foreach($arr as $key => $value) {
+                
+                //inicializando a variável com o dado a ser sanitizado
                 $cleanValue = $value;
+                
+                //se a opção de sanitização estiver ativada:
                 if($sanitize && isset($cleanValue)) {
-                    //
+                    
+                    //removendo tags html e php e espaços em branco
                     $cleanValue = strip_tags(trim($cleanValue));
-                    //
+                    //convertendo caracteres aplicáveis em entidades html, exceto aspas
                     $cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);
-                    // $cleanValue = mysqli_real_escape_string($conn, $cleanValue);
+                    
+                    //$cleanValue = mysqli_real_escape_string($conn, $cleanValue);
                 }
 
                 //utilização do set mágico para atribuição
