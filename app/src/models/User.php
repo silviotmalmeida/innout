@@ -37,6 +37,9 @@ class User extends Model {
         //se o end_date estiver vazio, preenche com null para adequar ao banco (date)
         if(!$this->end_date) $this->end_date = null;
         
+        //criptografando a senha
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+                
         //executando a função genérica de inserção
         return parent::insert();
     }

@@ -45,8 +45,6 @@ elseif(count($_POST) > 0) {
             
             //redireciona para o controller users.php
             header('Location: users.php');
-            
-            //encerra a execução
             exit();
             
         }
