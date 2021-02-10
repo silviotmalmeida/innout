@@ -23,3 +23,5 @@ Os usuários iniciais criados são:
 ***
 
 * Para encerrar a execução utiliza-se o comando "sudo ./stopContainers.sh";
+
+Foram incluídos diversos comentários para facilitar o entendimento do código.
