@@ -1,5 +1,5 @@
 # Projeto INNOUT
-## Projeto construído durante o curso "PHP 7 Completo - Curso do Desenvolvedor Web 2020 + Projetos" da COD3R.
+## Projeto Final construído durante o curso "PHP 7 Completo - Curso do Desenvolvedor Web 2020 + Projetos" da COD3R.
 
 Trata-se da implementação de sistema de ponto eletrônico.
 
